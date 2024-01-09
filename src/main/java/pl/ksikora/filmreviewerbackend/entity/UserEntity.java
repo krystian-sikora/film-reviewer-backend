@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.user;
+package pl.ksikora.filmreviewerbackend.entity;
 
 
 import jakarta.persistence.Entity;
@@ -7,6 +7,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +17,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.ksikora.filmreviewerbackend.enums.Role;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,15 +28,20 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_user")
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue
     private Long id;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @NotNull(message = "Nickname cannot be null")
+    @NotBlank(message = "Nickname cannot be blank")
     private String nickname;
+    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Password cannot be blank")
     private String password;
+    @Email(message = "Email should be valid")
     private String email;
 
     @Override

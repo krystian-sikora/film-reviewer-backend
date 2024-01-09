@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.token;
+package pl.ksikora.filmreviewerbackend.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -13,14 +13,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.ksikora.filmreviewerbackend.user.User;
+import pl.ksikora.filmreviewerbackend.enums.TokenType;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Token {
+public class TokenEntity {
 
     @Id
     @GeneratedValue
@@ -38,5 +38,5 @@ public class Token {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public User user;
+    public UserEntity user;
 }

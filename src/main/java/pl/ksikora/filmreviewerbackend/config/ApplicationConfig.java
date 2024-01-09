@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.ksikora.filmreviewerbackend.user.UserRepository;
+import pl.ksikora.filmreviewerbackend.repository.UserRepository;
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,9 +22,9 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
+        return email -> userRepository.findByEmail(email)
                 .map(user -> (UserDetails) user)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Email not found: " + email));
     }
 
     @Bean

@@ -1,17 +1,22 @@
-package pl.ksikora.filmreviewerbackend.auth;
+package pl.ksikora.filmreviewerbackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.ksikora.filmreviewerbackend.dto.AuthenticationRequest;
+import pl.ksikora.filmreviewerbackend.dto.AuthenticationResponse;
+import pl.ksikora.filmreviewerbackend.dto.RegistrationRequest;
 import pl.ksikora.filmreviewerbackend.config.JwtService;
-import pl.ksikora.filmreviewerbackend.token.Token;
-import pl.ksikora.filmreviewerbackend.token.TokenRepository;
-import pl.ksikora.filmreviewerbackend.token.TokenType;
-import pl.ksikora.filmreviewerbackend.user.Role;
-import pl.ksikora.filmreviewerbackend.user.User;
-import pl.ksikora.filmreviewerbackend.user.UserRepository;
+import pl.ksikora.filmreviewerbackend.entity.TokenEntity;
+import pl.ksikora.filmreviewerbackend.exceptions.UserAlreadyExistsException;
+import pl.ksikora.filmreviewerbackend.repository.TokenRepository;
+import pl.ksikora.filmreviewerbackend.enums.TokenType;
+import pl.ksikora.filmreviewerbackend.enums.Role;
+import pl.ksikora.filmreviewerbackend.entity.UserEntity;
+import pl.ksikora.filmreviewerbackend.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +28,8 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegistrationRequest request) {
-        var user = User.builder()
+    public AuthenticationResponse register(RegistrationRequest request) throws UserAlreadyExistsException {
+        var user = UserEntity.builder()
                 .email(request.getEmail())
                 .nickname(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -32,7 +37,7 @@ public class AuthenticationService {
                 .build();
 
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("User already exists");
+            throw new UserAlreadyExistsException("User already exists");
         }
         userRepository.save(user);
 
@@ -43,15 +48,16 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
 
         revokeAllUserTokens(user);
         String accessToken = jwtService.generateToken(user);
@@ -63,8 +69,8 @@ public class AuthenticationService {
                 .build();
     }
 
-    private void saveUserToken(User user, String jwtToken) {
-        var token = Token.builder()
+    private void saveUserToken(UserEntity user, String jwtToken) {
+        var token = TokenEntity.builder()
                 .user(user)
                 .token(jwtToken)
                 .tokenType(TokenType.BEARER)
@@ -75,7 +81,7 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
 
-    private void revokeAllUserTokens(User user) {
+    private void revokeAllUserTokens(UserEntity user) {
         var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
 
         if (validUserTokens.isEmpty()) return;
