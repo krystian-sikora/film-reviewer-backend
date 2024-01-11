@@ -41,9 +41,9 @@ public class ReviewController {
         return ResponseEntity.ok("update review");
     }
 
-    @GetMapping("/{movieId}")
+    @GetMapping("/get/{movieId}")
     public ResponseEntity<ArrayList<ReviewResponse>> get(
-            @PathVariable("movieId") Long movieId
+            @PathVariable Long movieId
     ) {
         return ResponseEntity.ok(service.getReviews(movieId));
     }

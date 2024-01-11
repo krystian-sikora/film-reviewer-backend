@@ -16,10 +16,13 @@ public class ReviewResponse {
 
     @JsonProperty("movie_id")
     private Long movieId;
+    @JsonProperty("account_id")
+    private Long accountId;
+    @JsonProperty("created_at")
+    private Instant createdAt;
     private Integer score;
     private String title;
     private String overview;
-    private Instant createdAt;
     private String nickname;
-    private Long accountId;
+
 }
