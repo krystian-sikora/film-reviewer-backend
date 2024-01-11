@@ -30,19 +30,18 @@ import java.util.List;
 @Table(name = "_user")
 public class UserEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Email(message = "Email should be valid")
+    private String email;
     @NotNull(message = "Nickname cannot be null")
     @NotBlank(message = "Nickname cannot be blank")
     private String nickname;
     @NotNull(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
     private String password;
-    @Email(message = "Email should be valid")
-    private String email;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

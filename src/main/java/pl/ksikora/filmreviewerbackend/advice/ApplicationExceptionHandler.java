@@ -14,6 +14,10 @@ import pl.ksikora.filmreviewerbackend.exceptions.UserAlreadyExistsException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static pl.ksikora.filmreviewerbackend.enums.Error.BAD_CREDENTIALS;
+import static pl.ksikora.filmreviewerbackend.enums.Error.USERNAME_NOT_FOUND;
+import static pl.ksikora.filmreviewerbackend.enums.Error.USER_ALREADY_EXISTS;
+
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
 
@@ -39,19 +43,19 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(UserAlreadyExistsException.class)
     public String handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
-        return ex.getMessage();
+        return USER_ALREADY_EXISTS.name();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(UsernameNotFoundException.class)
     public String handleUsernameNotFoundException(UsernameNotFoundException ex) {
-        return ex.getMessage();
+        return USERNAME_NOT_FOUND.name();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadCredentialsException.class)
     public String handleBadCredentialsException(BadCredentialsException ex) {
-        return ex.getMessage();
+        return BAD_CREDENTIALS.name();
     }
 
     private static String getExceptionMessage(TransactionSystemException ex) {
