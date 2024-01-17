@@ -7,4 +7,6 @@ import java.util.ArrayList;
 
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     ArrayList<ReviewEntity> getAllByTmdbId(Long movieId);
+    ArrayList<ReviewEntity> getAllByUserIdAndTmdbId(Long userId, Long movieId);
+
 }

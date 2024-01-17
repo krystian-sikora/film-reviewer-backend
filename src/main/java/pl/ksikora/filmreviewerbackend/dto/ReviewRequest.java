@@ -16,6 +16,6 @@ public class ReviewRequest {
     private Long movieId;
     private Integer score;
     private String title;
-    private String overview;
+    private String content;
 
 }

@@ -25,26 +25,33 @@ public class ReviewController {
     private final AuthenticationFacade authenticationFacade;
 
     @PostMapping("/add")
-    public ResponseEntity<ReviewResponse> add(
+    public ResponseEntity<ReviewResponse> addReview(
             @RequestBody ReviewRequest request
     ) {
         return ResponseEntity.ok(service.addReview(request, authenticationFacade.getCurrentUser()));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> delete() {
+    public ResponseEntity<String> deleteReview() {
         return ResponseEntity.ok("delete review");
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> update() {
+    public ResponseEntity<String> updateReview() {
         return ResponseEntity.ok("update review");
     }
 
     @GetMapping("/get/{movieId}")
-    public ResponseEntity<ArrayList<ReviewResponse>> get(
+    public ResponseEntity<ArrayList<ReviewResponse>> getReviews(
             @PathVariable Long movieId
     ) {
         return ResponseEntity.ok(service.getReviews(movieId));
+    }
+
+    @GetMapping("/verify/{movieId}")
+    public ResponseEntity<Boolean> checkIfUserReviewedMovie(
+            @PathVariable Long movieId
+    ) {
+        return ResponseEntity.ok(service.checkIfUserReviewedMovie(authenticationFacade.getCurrentUser(), movieId));
     }
 }

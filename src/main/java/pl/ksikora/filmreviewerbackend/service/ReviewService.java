@@ -23,7 +23,7 @@ public class ReviewService {
                         .movieId(review.getTmdbId())
                         .score(review.getScore())
                         .title(review.getTitle())
-                        .overview(review.getOverview())
+                        .content(review.getContent())
                         .accountId(review.getUser().getId())
                         .nickname(review.getUser().getNickname())
                         .createdAt(review.getCreatedAt())
@@ -37,7 +37,7 @@ public class ReviewService {
                 .tmdbId(request.getMovieId())
                 .score(request.getScore())
                 .title(request.getTitle())
-                .overview(request.getOverview())
+                .content(request.getContent())
                 .createdAt(Instant.now())
                 .build());
 
@@ -45,10 +45,14 @@ public class ReviewService {
                 .movieId(review.getTmdbId())
                 .score(review.getScore())
                 .title(review.getTitle())
-                .overview(review.getOverview())
+                .content(review.getContent())
                 .accountId(review.getUser().getId())
                 .createdAt(review.getCreatedAt())
                 .nickname(review.getUser().getNickname())
                 .build();
+    }
+
+    public Boolean checkIfUserReviewedMovie(UserEntity currentUser, Long movieId) {
+        return !repository.getAllByUserIdAndTmdbId(currentUser.getId(), movieId).isEmpty();
     }
 }

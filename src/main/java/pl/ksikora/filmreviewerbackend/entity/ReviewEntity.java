@@ -30,6 +30,6 @@ public class ReviewEntity {
     private Integer score;
     private Long tmdbId;
     private String title;
-    private String overview;
+    private String content;
     private Instant createdAt;
 }

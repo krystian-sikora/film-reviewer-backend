@@ -1,5 +1,8 @@
 package pl.ksikora.filmreviewerbackend.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,6 +21,8 @@ import pl.ksikora.filmreviewerbackend.enums.TokenType;
 import pl.ksikora.filmreviewerbackend.enums.Role;
 import pl.ksikora.filmreviewerbackend.entity.UserEntity;
 import pl.ksikora.filmreviewerbackend.repository.UserRepository;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +78,37 @@ public class AuthenticationService {
                 .accessToken(accessToken)
                 .refreshToken(jwtService.generateRefreshToken(user))
                 .build();
+    }
+
+    public void refresh(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        final String authHeader = request.getHeader("AUTHORIZATION");
+        final String refreshToken;
+        final String userEmail;
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) return;
+
+        refreshToken = authHeader.substring(7);
+        userEmail = jwtService.extractEmail(refreshToken);
+
+        if (userEmail == null) return;
+
+        var user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (jwtService.isTokenValid(refreshToken, user)) {
+            revokeAllUserTokens(user);
+            String accessToken = jwtService.generateToken(user);
+            saveUserToken(user, accessToken);
+
+            var authResponse = AuthenticationResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
+            new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+        }
     }
 
     private void saveUserToken(UserEntity user, String jwtToken) {

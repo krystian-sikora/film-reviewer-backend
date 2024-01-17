@@ -22,7 +22,6 @@ public class ReviewResponse {
     private Instant createdAt;
     private Integer score;
     private String title;
-    private String overview;
+    private String content;
     private String nickname;
-
 }
