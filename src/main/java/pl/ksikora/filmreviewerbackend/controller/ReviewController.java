@@ -1,5 +1,6 @@
 package pl.ksikora.filmreviewerbackend.controller;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +50,7 @@ public class ReviewController {
     }
 
     @GetMapping("/verify/{movieId}")
-    public ResponseEntity<Boolean> checkIfUserReviewedMovie(
+    public ResponseEntity<ObjectNode> checkIfUserReviewedMovie(
             @PathVariable Long movieId
     ) {
         return ResponseEntity.ok(service.checkIfUserReviewedMovie(authenticationFacade.getCurrentUser(), movieId));
