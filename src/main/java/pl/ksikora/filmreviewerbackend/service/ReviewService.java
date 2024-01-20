@@ -86,4 +86,18 @@ public class ReviewService {
         node.set("review", reviewNode);
         return node;
     }
+
+    public ArrayList<ReviewResponse> deleteReview(UserEntity currentUser, Long movieId) {
+        return repository.deleteAllByUserIdAndTmdbId(currentUser.getId(), movieId).stream().map(
+                review -> ReviewResponse.builder()
+                        .movieId(review.getTmdbId())
+                        .score(review.getScore())
+                        .title(review.getTitle())
+                        .content(review.getContent())
+                        .accountId(review.getUser().getId())
+                        .nickname(review.getUser().getNickname())
+                        .createdAt(review.getCreatedAt())
+                        .build()
+        ).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+    }
 }
