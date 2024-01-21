@@ -1,10 +1,26 @@
 version: '3.5'
 
 services:
+  app:
+    container_name: app_container
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      db-url: jdbc:postgresql://postgres:5432/postgres
+      db-username: postgres
+      db-password: admin
+    depends_on:
+      - postgres
+    restart:
+      always
+
   postgres:
     container_name: postgres_container
     image: postgres
     environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       PGDATA: /data/postgres
@@ -12,8 +28,6 @@ services:
       - postgres:/data/postgres
     ports:
       - "5432:5432"
-    networks:
-      - postgres
     restart: unless-stopped
 
 networks:
