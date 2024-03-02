@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.controller;
+package pl.ksikora.filmreviewerbackend.review;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.ksikora.filmreviewerbackend.dto.ReviewRequest;
-import pl.ksikora.filmreviewerbackend.dto.ReviewResponse;
-import pl.ksikora.filmreviewerbackend.facade.AuthenticationFacade;
-import pl.ksikora.filmreviewerbackend.service.ReviewService;
+import pl.ksikora.filmreviewerbackend.auth.AuthenticationFacade;
 
 import java.util.ArrayList;
 

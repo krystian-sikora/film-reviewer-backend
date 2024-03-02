@@ -1,8 +1,7 @@
-package pl.ksikora.filmreviewerbackend.repository;
+package pl.ksikora.filmreviewerbackend.review;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.ksikora.filmreviewerbackend.entity.ReviewEntity;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
-package pl.ksikora.filmreviewerbackend.entity;
+package pl.ksikora.filmreviewerbackend.token;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.ksikora.filmreviewerbackend.enums.TokenType;
+
+import pl.ksikora.filmreviewerbackend.user.UserEntity;
 
 @Data
 @Builder
@@ -32,5 +33,4 @@ public class TokenEntity {
     public UserEntity user;
     public boolean revoked;
     public boolean expired;
-
 }

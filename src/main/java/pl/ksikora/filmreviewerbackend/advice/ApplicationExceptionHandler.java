@@ -9,14 +9,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.ksikora.filmreviewerbackend.exceptions.UserAlreadyExistsException;
+import pl.ksikora.filmreviewerbackend.user.UserAlreadyExistsException;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static pl.ksikora.filmreviewerbackend.enums.Error.BAD_CREDENTIALS;
-import static pl.ksikora.filmreviewerbackend.enums.Error.USERNAME_NOT_FOUND;
-import static pl.ksikora.filmreviewerbackend.enums.Error.USER_ALREADY_EXISTS;
+import static pl.ksikora.filmreviewerbackend.advice.Error.BAD_CREDENTIALS;
+import static pl.ksikora.filmreviewerbackend.advice.Error.USERNAME_NOT_FOUND;
+import static pl.ksikora.filmreviewerbackend.advice.Error.USER_ALREADY_EXISTS;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {

@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.exceptions;
+package pl.ksikora.filmreviewerbackend.user;
 
 public class UserAlreadyExistsException extends IllegalStateException {
     public UserAlreadyExistsException(String errorMessage) {

@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.enums;
+package pl.ksikora.filmreviewerbackend.advice;
 
 public enum Error {
     USER_ALREADY_EXISTS,

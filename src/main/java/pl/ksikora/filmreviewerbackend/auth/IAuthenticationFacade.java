@@ -1,8 +1,9 @@
-package pl.ksikora.filmreviewerbackend.facade;
+package pl.ksikora.filmreviewerbackend.auth;
 
 
 import org.springframework.security.core.Authentication;
 
 public interface IAuthenticationFacade {
+
     Authentication getAuthentication();
 }

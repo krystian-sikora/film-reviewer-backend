@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.dto;
+package pl.ksikora.filmreviewerbackend.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

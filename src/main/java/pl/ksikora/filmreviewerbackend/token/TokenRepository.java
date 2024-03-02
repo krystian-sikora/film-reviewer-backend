@@ -1,8 +1,7 @@
-package pl.ksikora.filmreviewerbackend.repository;
+package pl.ksikora.filmreviewerbackend.token;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pl.ksikora.filmreviewerbackend.entity.TokenEntity;
 
 import java.util.List;
 

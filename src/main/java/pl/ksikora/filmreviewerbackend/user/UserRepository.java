@@ -1,7 +1,6 @@
-package pl.ksikora.filmreviewerbackend.repository;
+package pl.ksikora.filmreviewerbackend.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.ksikora.filmreviewerbackend.entity.UserEntity;
 
 import java.util.Optional;
 

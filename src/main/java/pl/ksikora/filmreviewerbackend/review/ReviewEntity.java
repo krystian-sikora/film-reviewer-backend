@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.entity;
+package pl.ksikora.filmreviewerbackend.review;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.ksikora.filmreviewerbackend.user.UserEntity;
 
 import java.time.Instant;
 

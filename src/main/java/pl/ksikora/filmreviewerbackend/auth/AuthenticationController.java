@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.controller;
+package pl.ksikora.filmreviewerbackend.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.ksikora.filmreviewerbackend.dto.AuthenticationRequest;
-import pl.ksikora.filmreviewerbackend.dto.AuthenticationResponse;
-import pl.ksikora.filmreviewerbackend.exceptions.UserAlreadyExistsException;
-import pl.ksikora.filmreviewerbackend.service.AuthenticationService;
-import pl.ksikora.filmreviewerbackend.dto.RegistrationRequest;
+import pl.ksikora.filmreviewerbackend.user.UserAlreadyExistsException;
 
 import java.io.IOException;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.dto;
+package pl.ksikora.filmreviewerbackend.review;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -17,5 +17,4 @@ public class ReviewRequest {
     private Integer score;
     private String title;
     private String content;
-
 }

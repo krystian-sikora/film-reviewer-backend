@@ -9,5 +9,4 @@ public class FilmReviewerBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(FilmReviewerBackendApplication.class, args);
     }
-
 }

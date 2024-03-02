@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.dto;
+package pl.ksikora.filmreviewerbackend.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegistrationRequest {
 
     private String email;
+    private String username;
     private String password;
 }

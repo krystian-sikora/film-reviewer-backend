@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.service;
+package pl.ksikora.filmreviewerbackend.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,17 +10,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.ksikora.filmreviewerbackend.dto.AuthenticationRequest;
-import pl.ksikora.filmreviewerbackend.dto.AuthenticationResponse;
-import pl.ksikora.filmreviewerbackend.dto.RegistrationRequest;
 import pl.ksikora.filmreviewerbackend.config.JwtService;
-import pl.ksikora.filmreviewerbackend.entity.TokenEntity;
-import pl.ksikora.filmreviewerbackend.exceptions.UserAlreadyExistsException;
-import pl.ksikora.filmreviewerbackend.repository.TokenRepository;
-import pl.ksikora.filmreviewerbackend.enums.TokenType;
-import pl.ksikora.filmreviewerbackend.enums.Role;
-import pl.ksikora.filmreviewerbackend.entity.UserEntity;
-import pl.ksikora.filmreviewerbackend.repository.UserRepository;
+import pl.ksikora.filmreviewerbackend.token.TokenEntity;
+import pl.ksikora.filmreviewerbackend.token.TokenRepository;
+import pl.ksikora.filmreviewerbackend.token.TokenType;
+import pl.ksikora.filmreviewerbackend.user.Role;
+import pl.ksikora.filmreviewerbackend.user.UserAlreadyExistsException;
+import pl.ksikora.filmreviewerbackend.user.UserEntity;
+import pl.ksikora.filmreviewerbackend.user.UserRepository;
 
 import java.io.IOException;
 

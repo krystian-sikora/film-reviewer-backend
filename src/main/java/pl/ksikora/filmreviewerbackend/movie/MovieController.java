@@ -1,4 +1,4 @@
-package pl.ksikora.filmreviewerbackend.controller;
+package pl.ksikora.filmreviewerbackend.movie;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

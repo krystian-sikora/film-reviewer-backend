@@ -1,15 +1,11 @@
-package pl.ksikora.filmreviewerbackend.service;
+package pl.ksikora.filmreviewerbackend.review;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.ksikora.filmreviewerbackend.dto.ReviewRequest;
-import pl.ksikora.filmreviewerbackend.dto.ReviewResponse;
-import pl.ksikora.filmreviewerbackend.entity.ReviewEntity;
-import pl.ksikora.filmreviewerbackend.entity.UserEntity;
-import pl.ksikora.filmreviewerbackend.repository.ReviewRepository;
+import pl.ksikora.filmreviewerbackend.user.UserEntity;
 
 import java.time.Instant;
 import java.util.ArrayList;
